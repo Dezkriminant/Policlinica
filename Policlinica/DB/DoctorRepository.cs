@@ -13,9 +13,9 @@ public class DoctorRepository
     {
         connection = new MySqlConnection(connect.Value.ConnectionString);
     }
-    public List<Doctors> GetDoctorsByTest()
+    public List<Doctor> GetDoctorsByTest()
     {
-        List<Doctors> result = new List<Doctors>();
+        List<Doctor> result = new List<Doctor>();
         string sql = "select  * from doctors";
         try
         {
@@ -25,7 +25,7 @@ public class DoctorRepository
             {
                 while (dr.Read())
                 {
-                    result.Add(new Doctors
+                    result.Add(new Doctor
                     {
                         Id = dr.GetInt32("id"),
                         Title = dr.GetString("title"),

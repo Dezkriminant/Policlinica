@@ -14,8 +14,7 @@ public partial class PasswordWindowViewModel : ViewModelBase
     private readonly IServiceProvider _provider;
     [ObservableProperty] string username;
     [ObservableProperty] string password;
-    [ObservableProperty] List<Users> _usersList;
-    [ObservableProperty] private Users selectedUsers;
+    [ObservableProperty] List<User> _usersList;
     [ObservableProperty] UserRepository _repository;
 
     public PasswordWindowViewModel(IServiceProvider provider, UserRepository repository )
@@ -28,11 +27,9 @@ public partial class PasswordWindowViewModel : ViewModelBase
     [RelayCommand]
     public void StartTest()
     {
-        if (SelectedUsers == null)
-            return;
+        
         var vm = ActivatorUtilities.CreateInstance<AdminWindowViewModel>(
             _provider,
-            SelectedUsers,
             Username);
         var win = _provider.GetRequiredService<AdminWindow>();
         //vm.SetClose(win.Close);
@@ -44,16 +41,13 @@ public partial class PasswordWindowViewModel : ViewModelBase
     [RelayCommand]
     public void SaveDB()
     {
-        Users user = new Users
+        User user = new User
         {
             Name = Username,
-            Password = Password, 
-            Id = SelectedUsers.Id,
-          
+            Password = Password
         };
-        _repository.InsertUser(user);
-        if (SelectedUsers == null)
-            return;
+       // if(Users user )
+        _repository.CheckLoginAndPassword(name,password);
         var vm = _serviceProvider.GetRequiredService<AdminWindowViewModel>();
         var win = _serviceProvider.GetRequiredService<AdminWindow>();
         

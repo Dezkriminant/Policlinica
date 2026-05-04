@@ -1,6 +1,6 @@
 ﻿namespace Policlinica.DB;
 
-public class RecordItems
+public class RecordItem
 {
     public int Id { get; set; }
     

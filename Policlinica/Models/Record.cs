@@ -2,7 +2,7 @@
 
 namespace Policlinica.DB;
 
-public class Records
+public class Record
 {
     public int Id { get; set; }
     

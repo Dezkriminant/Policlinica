@@ -1,6 +1,6 @@
 ﻿namespace Policlinica.DB;
 
-public class Services
+public class Service
 {
     public int Id { get; set; }
     

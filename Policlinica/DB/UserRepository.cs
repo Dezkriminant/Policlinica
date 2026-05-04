@@ -15,7 +15,7 @@ public class UserRepository
     }
 
 
-    public void InsertUser(Users users)
+    public void InsertUser(User user)
     {
         var sql1 = "INSERT INTO Polyclinica.users (id, name, password) VALUES (0, @name, @password); ";
         var sql2 = "SELECT max(id) as id FROM Polyclinica.users;";
@@ -23,9 +23,9 @@ public class UserRepository
     }
 
 
-    public List<Users> GetUsersByTest()
+    public List<User> GetUsersByTest()
     {
-        List<Users> result = new List<Users>();
+        List<User> result = new List<User>();
         string sql = "select  * from users";
         try
         {
@@ -35,12 +35,12 @@ public class UserRepository
             {
                 while (dr.Read())
                 {
-                    result.Add(new Users
+                    result.Add(new User
                     {
                         Id = dr.GetInt32("id"),
                         Name = dr.GetString("name"),
                         Password = dr.GetString("password"),
-                       
+
                     });
                 }
             }
@@ -57,5 +57,37 @@ public class UserRepository
         }
 
         return result;
+    }
+
+
+    public List<User> CheckLoginAndPassword(string name, string password)
+    {
+        List<User> us = new List<User>();
+        string sql = @"select * from `users` where `Name` = @name and `Password` = @password";
+        try
+        {
+            using (var mc = new MySqlCommand(sql, connection))
+            {
+                mc.Parameters.AddWithValue("@name", name);
+                mc.Parameters.AddWithValue("@password", password);
+                var reader = mc.ExecuteReader();
+                while (reader.Read())
+                {
+                    us.Add(new User()
+                    {
+                        Id = reader.GetInt32("id"),
+                        Name = reader.GetString("name"),
+                        Password = reader.GetString("password"),
+                    });
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+
+        }
+
+        return us;
     }
 }
