@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="Policlinica/App.axaml" value="Policlinica/Policlinica.csproj" />
+        <entry key="Policlinica/Views/PasswordWindow.axaml" value="Policlinica/Policlinica.csproj" />
+        <entry key="Policlinica/Views/RegistrationWindow.axaml" value="Policlinica/Policlinica.csproj" />
+        <entry key="Policlinica/Views/Rexord.axaml" value="Policlinica/Policlinica.csproj" />
+        <entry key="Policlinica/Views/StartWindow.axaml" value="Policlinica/Policlinica.csproj" />
+      </map>
+    </option>
+  </component>
+</project>
