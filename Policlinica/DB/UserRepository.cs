@@ -40,7 +40,6 @@ public class UserRepository:BaseRep
         string sql = "select  * from users";
         try
         {
-            connection.Open();
             using (var mc = new MySqlCommand(sql, connection))
             using (var dr = mc.ExecuteReader())
             {
@@ -103,9 +102,38 @@ public class UserRepository:BaseRep
 
     public void Dispose()
     {
-        base.Dispose();
         CloseConnection();
+        base.Dispose();
     }
 
    
+    
+    
+    public List<User> CheckLogin(string name)
+    {
+        List<User> us = new List<User>();
+        string sql = @"select * from `users` where `Name` = @name";
+        try
+        {
+            using (var mc = new MySqlCommand(sql, connection))
+            {
+                mc.Parameters.AddWithValue("@name", name);
+                var reader = mc.ExecuteReader();
+                while (reader.Read())
+                {
+                    us.Add(new User()
+                    {
+                        Id = reader.GetInt32("id"),
+                        Name = reader.GetString("name"),
+                    });
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+
+        return us;
+    }
 }

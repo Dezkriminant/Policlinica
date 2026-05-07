@@ -14,6 +14,7 @@
            <TextBox Watermark="Придумайте имя" Text="{Binding Login}"/>
            <TextBlock Text="Пароль" HorizontalAlignment="Center"/>
            <TextBox Watermark="Придумайте пароль" Text="{Binding Password}"/>
+           <TextBlock Text="{Binding Eror}" Foreground="Red"/>
            <StackPanel Orientation="Horizontal">
                <Button Content= "Зарегистрироваться" Command="{Binding RegistrationCommand}"/>
                <HyperlinkButton Command="{Binding OpenAutorizationCommand}" Content="Авторизоваться"/>

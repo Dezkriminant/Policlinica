@@ -15,44 +15,53 @@ public partial class AutorizationViewModel : ViewModelBase
 
     [ObservableProperty] string _login;
     [ObservableProperty] string _password;
-    [ObservableProperty] List<User> _usersList;
-    [ObservableProperty] UserRepository _repository;
+    [ObservableProperty] public string _eror;
 
-    public AutorizationViewModel(IServiceProvider provider, UserRepository repository,Navigation navigation )
+    public AutorizationViewModel(IServiceProvider provider, Navigation navigation)
     {
         _provider = provider;
         _navigation = navigation;
-
-        _usersList = repository.GetUsersByTest();
-       // _repository = repository;
     }
 
     [RelayCommand]
     public void StartTest()
     {
-        
         var vm = ActivatorUtilities.CreateInstance<AdminWindowViewModel>(
             _provider,
-            Login);
+            Login,
+            Password);
         var win = _provider.GetRequiredService<AdminWindow>();
-            //vm.SetClose(win.Close);
-        win.DataContext = vm;
-        win.Show();
-        // close();
-
-    }
-    [RelayCommand]
-    public void SaveDB()
-    {
-         _repository.CheckLoginAndPassword(Login,Password);
-        var vm = _provider.GetRequiredService<AdminWindowViewModel>();
-        var win = _provider.GetRequiredService<AdminWindow>();
-        
         //vm.SetClose(win.Close);
         win.DataContext = vm;
         win.Show();
-        //close();
+        // close();
     }
+
+    [RelayCommand]
+    public void Conti()
+    {
+        List<User> SpUser = new();
+
+        using (UserRepository repository = _provider.GetRequiredService<UserRepository>())
+        {
+            SpUser = repository.CheckLoginAndPassword(Login, Password);
+        }
+
+        if (SpUser.Count == 0)
+        {
+            Eror = "Неверный логин или пароль";
+            return;
+        }
+
+
+        var vm = _provider.GetRequiredService<AdminWindowViewModel>();
+        var win = _provider.GetRequiredService<AdminWindow>();
+        //vm.SetClose(win.Close);
+        win.DataContext = vm;
+        win.Show();
+            //Сlose();
+    }
+
 
     [RelayCommand]
     void OpenRegWin()
@@ -60,4 +69,5 @@ public partial class AutorizationViewModel : ViewModelBase
         var vm = _provider.GetRequiredService<RegistrationViewModel>();
         _navigation.Navigate(vm);
     }
+
 }

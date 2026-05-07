@@ -1,6 +1,6 @@
 ﻿namespace Policlinica.ViewModels;
 
-public class AdminWindowViewModel
+public class AdminWindowViewModel : ViewModelBase
 {
     
 }

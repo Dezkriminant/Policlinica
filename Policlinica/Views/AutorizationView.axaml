@@ -16,9 +16,10 @@
         <TextBox Text="{Binding Login}"/>
         <TextBlock Text="Пароль:" />
         <TextBox Text="{Binding Password}"/>
+        <TextBlock Text="{Binding Eror}" Foreground="Red"/>
         <StackPanel Orientation="Horizontal">
             <Button Content="Продолжить" 
-                    Command="{Binding SaveDBCommand}"/>
+                    Command="{Binding ContiCommand}"/>
             <HyperlinkButton Content="Регистрация" 
                     Command="{Binding OpenRegWinCommand}"/>
          </StackPanel>
