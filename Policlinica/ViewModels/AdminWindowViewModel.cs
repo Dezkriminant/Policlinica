@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Policlinica.DB;
 using Policlinica.Views;
 
+
 namespace Policlinica.ViewModels;
 
 public partial class AdminWindowViewModel : ViewModelBase
@@ -30,5 +31,11 @@ public partial class AdminWindowViewModel : ViewModelBase
         
         RecordsList = new ObservableCollection<Record>(recordRep.GetRecord());
     }
-    
+
+    [RelayCommand]
+    void DeleteRecord()
+    {
+        _recordRep.Delete(SelectedRecord.Id);
+        RecordsList = new ObservableCollection<Record>(_recordRep.GetRecord());
+    }
 }

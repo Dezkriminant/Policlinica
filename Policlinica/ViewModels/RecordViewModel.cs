@@ -10,4 +10,5 @@ public partial class RecordViewModel:ViewModelBase
     {
         _serviceProvider = serviceProvider;
     }
+    
 }

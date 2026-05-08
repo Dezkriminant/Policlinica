@@ -10,6 +10,8 @@
         <Grid RowDefinitions="Auto,*,Auto" Margin="20">
                <DataGrid ItemsSource="{Binding RecordsList }" SelectedItem="{Binding SelectedRecord }">
                    <DataGrid.Columns>
+                       <DataGridCheckBoxColumn IsVisible="True"/>
+                       <!--><DataGridCheckBoxColumn/><!-->
                        <DataGridTextColumn Binding="{Binding ClientName}" Header="Имя клиента"/>
                        <DataGridTextColumn Binding="{Binding ClientSurname}" Header="Фамилия клиента"/>
                        <DataGridTextColumn Binding="{Binding Title}" Header="Врач"/>
@@ -20,8 +22,8 @@
            <StackPanel Grid.Row="2" Orientation="Horizontal">
                    
            
-                <Button Content="Удалить выбранную работу" FontSize="20" HorizontalAlignment="Center" Command="{Binding }"/>
-                <Button Content="Дабавить запись" FontSize="20" HorizontalAlignment="Center" Command="{Binding }"/>
+                <Button Content="Удалить выбранную работу" FontSize="20" HorizontalAlignment="Center" Command="{Binding DeleteRecordCommand}"/>
+                <Button Content="Добавить запись" FontSize="20" HorizontalAlignment="Center" Command="{Binding }"/>
            </StackPanel>
         </Grid>
 </UserControl>

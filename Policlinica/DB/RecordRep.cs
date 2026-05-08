@@ -43,6 +43,8 @@ public class RecordRep:BaseRep
                     }
                 }
             }
+            
+            
         }
         catch (Exception e)
         {
@@ -50,4 +52,25 @@ public class RecordRep:BaseRep
         }
         return recordsList;
     }
+    public bool Delete(int id)
+    {
+        string sql = @"delete from `records` where `id` = @id";
+        try
+        {
+            using (var mc = new MySqlCommand(sql, connection))
+            {
+                mc.Parameters.AddWithValue("@id",id);
+                mc.ExecuteNonQuery();
+                
+            }
+            return true;
+
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        return false;
+    }
+
 }

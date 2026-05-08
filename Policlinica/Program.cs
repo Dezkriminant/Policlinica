@@ -50,7 +50,6 @@ sealed class Program
                 
                 s.AddTransient<Records>();
                 s.AddTransient<RecordViewModel>();
-                s.AddTransient<InfoViewModel>();
             }).
             Build();
         BuildAvaloniaApp(host.Services)
